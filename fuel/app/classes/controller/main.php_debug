@@ -1,0 +1,25 @@
+<?php
+
+
+
+class Controller_Main extends Controller_Template
+{
+	public $template = "main";
+	public function action_index()
+	{
+		$data = array();
+		$data['head'] = 'All Content';
+		$data['folder'] = DB::query('SELECT * FROM folder_list')->execute()->as_array();
+		$data['board'] = DB::query("SELECT * FROM board_list b order by b_num desc")->execute()->as_array();
+		$this->template->header  = View::forge ( 'header/header', $data );
+		$this->template->content = View::forge ( 'content/board/list' , $data, false );
+		$this->template->menu    = View::forge ( 'content/board/menu' , $data );
+		//return Response::forge(Presenter::forge('main/index'));
+	}
+
+	public function action_404()
+	{
+		return Response::forge(Presenter::forge('main/404'), 404);
+	}
+}
+	
