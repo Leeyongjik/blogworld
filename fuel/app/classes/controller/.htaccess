@@ -1,4 +1,0 @@
-AuthType Basic
-AuthName "Login Please"
-AuthUserFile /var/www/html/password
-Require valid-user 
